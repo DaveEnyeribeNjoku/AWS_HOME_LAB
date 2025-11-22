@@ -1,0 +1,31 @@
+# BONUS S3 + CloudWatch – David Njoku (22/11/2025)
+
+Fonctionnalités implémentées dans ce homelab AWS Free Tier :
+
+- Bucket S3 sécurisé avec :
+  - Versioning activé
+  - Lifecycle rule : suppression automatique après 90 jours
+  - Nom unique et tags clairs
+- Alarme CloudWatch :
+  - Déclenchée si le bucket dépasse 1 Go (BucketSizeBytes)
+  - Prête à être connectée à un topic SNS (rajoute-le en prod)
+- Code 100 % reproductible et commenté
+
+```hcl
+# Exemple d'alarme (déjà dans cloudwatch.tf)
+resource "aws_cloudwatch_metric_alarm" "s3_high_size_alert" {
+  alarm_name          = "homelab-s3-high-size-alert-david-njoku"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 1
+  metric_name         = "BucketSizeBytes"
+  namespace           = "AWS/S3"
+  period              = 86400
+  statistic           = "Average"
+  threshold           = 1000000000  # 1 GB
+  alarm_description   = "Alerte si le bucket de backup dépasse 1 Go – David Njoku"
+
+  dimensions = {
+    BucketName  = aws_s3_bucket.homelab_backup.bucket
+    StorageType = "StandardStorage"
+  }
+}
