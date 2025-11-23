@@ -11,9 +11,8 @@ Déploiement complet d'une infrastructure AWS avec Terraform :
 **Objectif** : Montrer mes compétences AWS EC2/VPC/SG/IAM 
 **Date** : 22/11/2025  
 **Auteur** : David Njoku - AWS Certified Practitioner  
-[![AWS Certified Cloud Practitioner](https://images.credly.com/images/...)](https://www.credly.com/badges/...)
-[![AWS Technical Essentials](https://images.credly.com/images/...)](https://www.credly.com/badges/...)
-
+[![AWS Certified Cloud Practitioner]
+[![AWS Technical Essentials]
 ### Commandes pour déployer :
 ```bash
 terraform init
